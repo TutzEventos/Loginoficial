@@ -2,6 +2,7 @@
 //o include_once é responsavel em incluir um arquivo apena quando for necessario, ou seja, se o arquivo já estiver sido 
 //incluindo anteriormente o include_once não é executado.
 include_once 'conexao/conecta.inc';
+include 'classes/Bcrypt.class.php';
 echo '<meta charset=UTF-8>';
 session_start();
 // a linha 8 é para saber se esses 2 itens foram cadastrados correto e  depois ele lê a linha 10 e 11 para poder acessar o banco de dados para saber se 
@@ -24,12 +25,12 @@ if(isset($_POST['email']) and isset($_POST['senha']))
    $tipoUsuario = $array['TIPO_USUARIO'];
    
 // echo $senhaUsuario . '<br/>'
-    if ($senha !== $senhaUsuario)
+    if(!Bcrypt::check($senha, $senhaUsuario))
      {
         echo 'Senha não confere !';
     }else{
-        $_SESSION['email_usuario'] = $email;
-        $_SESSION['senha_usuario'] = $senha;
+        $_SESSION['email'] = $email;
+        $_SESSION['senha'] = $senha;
         $_SESSION['tipoUsuario'] = $tipoUsuario;
        if($tipoUsuario === 'RES')
            { 

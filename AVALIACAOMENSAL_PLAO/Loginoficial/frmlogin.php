@@ -6,7 +6,7 @@
         <meta lang="pt-br">
     </head>
     <body>
-        <form method="post" action="criptografiaBcrypt.php">
+        <form method="post" action="login.php">
           Email:  <input type="email" name="email"><br/>
             Senha: <input type="password" name="senha"><br/>
             <input type="submit" value="Enviar">

@@ -2,6 +2,7 @@
 function ValidaAutenticacao($link,$tipo) 
 {
     echo '<meta charset=UTF-8>'; 
+    include 'classes/Bcrypt.class.php';
     session_start();
     if(!isset($_SESSION['email']) or !isset($_SESSION['senha']))
     {
@@ -35,7 +36,8 @@ function ValidaAutenticacao($link,$tipo)
         echo '<script type="text/javascript">
              location.href = "'.$link.'"
                  </script>';
-    }elseif($senha !== $usuarios['SENHA_USUARIO'])
+        
+    }elseif( !Bcrypt::check($senha, $usuarios['SENHA_USUARIO']))
     {
         session_destroy();
        echo '<script type="text/javascript">
